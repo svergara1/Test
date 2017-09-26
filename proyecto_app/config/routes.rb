@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
   
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  get 'home/index'
+
+  root 'home#index'
+
   resources :songs
   resources :albums
   resources :artists
-  root 'bands#index'
   resources :bands
 
   devise_for :users
