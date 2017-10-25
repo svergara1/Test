@@ -4,7 +4,7 @@ class SongsController < ApplicationController
   # GET /songs
   # GET /songs.json
   def index
-    @songs = Song.all
+    @songs = Song.where(["name LIKE ?", "%#{params[:search]}%"])
   end
 
   # GET /songs/1

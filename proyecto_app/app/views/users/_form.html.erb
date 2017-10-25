@@ -1,0 +1,33 @@
+<br><br><br>
+<div class="panel panel-default devise-bs">
+  <div class="panel-heading">
+    <h4>Editar Usuario</h4>
+  </div>
+  <div class="panel-body">
+
+    <%= simple_form_for user do |f| %>
+
+      <% if user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+          <ul>
+          <% user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+
+
+
+      <br><br> 
+       <div class="form-actions">
+          <%= f.button :submit, 'Actualizar' %>
+      </div>
+
+  <% end %>
+
+  </div>
+</div>

@@ -10,12 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170926205202) do
+ActiveRecord::Schema.define(version: 20171024235614) do
 
   create_table "albums", force: :cascade do |t|
     t.text     "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "band_id"
+    t.date     "released_date"
+    t.index ["band_id"], name: "index_albums_on_band_id"
   end
 
   create_table "artists", force: :cascade do |t|
@@ -23,6 +26,8 @@ ActiveRecord::Schema.define(version: 20170926205202) do
     t.text     "lastname"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "band_id"
+    t.index ["band_id"], name: "index_artists_on_band_id"
   end
 
   create_table "bands", force: :cascade do |t|
@@ -31,10 +36,40 @@ ActiveRecord::Schema.define(version: 20170926205202) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "songs", force: :cascade do |t|
-    t.text     "name"
+  create_table "follows", force: :cascade do |t|
+    t.integer  "following_id", null: false
+    t.integer  "follower_id",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["follower_id"], name: "index_follows_on_follower_id"
+    t.index ["following_id", "follower_id"], name: "index_follows_on_following_id_and_follower_id", unique: true
+    t.index ["following_id"], name: "index_follows_on_following_id"
+  end
+
+  create_table "playlist_songs", force: :cascade do |t|
+    t.integer  "playlist_id"
+    t.integer  "song_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["playlist_id"], name: "index_playlist_songs_on_playlist_id"
+    t.index ["song_id"], name: "index_playlist_songs_on_song_id"
+  end
+
+  create_table "playlists", force: :cascade do |t|
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_playlists_on_user_id"
+  end
+
+  create_table "songs", force: :cascade do |t|
+    t.text     "name"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "album_id"
+    t.integer  "duration"
+    t.date     "released_date"
+    t.index ["album_id"], name: "index_songs_on_album_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -51,8 +86,12 @@ ActiveRecord::Schema.define(version: 20170926205202) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.integer  "playlist_id"
+    t.integer  "song_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["playlist_id"], name: "index_users_on_playlist_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["song_id"], name: "index_users_on_song_id"
   end
 
 end

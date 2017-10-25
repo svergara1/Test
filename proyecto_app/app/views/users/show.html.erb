@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<body style="background-color: #333;">
+      <div class="row">
+      <h2  class="pull-left" style="color: white;"><%= @user.email%></h2></div><br><br>
+      <div class="row">
+       
+          <div class="card card-inverse" style="background-color: #333; border-color: #333;">
+
+   
+
+                <div class="row">
+                  <div class="col-md-6 col-lg-3 " align="center"> <img alt="User Pic" src="https://i.pinimg.com/originals/d9/68/c7/d968c710f77a940f052f88611f558dc8.jpg" class="img-circle img-responsive"> </div>
+                
+                  <div class=" col-md-9 col-lg-9 "> 
+                    <table class="table table-user-information">
+                      <div class="col-md-4 col-sm-4 text-center">
+                        <h2 style="color: white;"><strong> 5.2K </strong></h2>                    
+                        <p style="color: white;"><small>Fans</small></p>
+                        <button class="btn btn-primary btn-block btn-md"><span class="fa fa-facebook-square"></span></button>
+                        </div>
+                        <div class="col-md-4 col-sm-4 text-center">
+                        <h2 style="color: white;"><strong>1.4K</strong></h2>                    
+                        <p style="color: white;"><small>Following</small></p>
+                        <button class="btn btn-success btn-block btn-md"><span class="fa fa-twitter-square"></span> Tweet </button>
+                        </div>
+                        <div class="col-md-4 col-sm-4 text-center">
+                        <h2 style="color: white;"><strong>3.8K</strong></h2>                    
+                        <p style="color: white;"><small>Followers</small></p>
+                        <input type="button" class="btn btn-danger btn-block btn-md" onclick="unfollow_user_path,
+                             remote: true,
+                             class: 'btn unfollow-button',
+                             id: 'unfollow-button',
+                             method: :post;" value="Follow" />
+                    </table>
+                  </div>
+              </div>
+            </div>
+            
+            
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+
+

@@ -1,2 +1,200 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+    font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+    height: 100%;
+    width: 300px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.sidenav a {
+    padding: 6px 6px 6px 32px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.main {
+    margin-left: 200px; /* Same as the width of the sidenav */
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
+</head>
+<body>
+
+<div class="sidenav"><br><br><br><br>
+  <li onclick="location.href = '<%= user_path(current_user) %>';">
+            <a><i class="fa fa-user"></i>  Profile
+            </a>
+            </li>
+
+            </li>
+  <li onclick="location.href = '<%= users_path%>';">
+            <a><i class="fa fa-thumbs-up"></i>  Users
+            </a>
+            </li>
+  <li onclick="location.href = '#';">
+            <a><i class="fa fa-envelope"></i>  Contact
+            </a>
+            </li>
+  <% if current_user.admin %>              
+            <li onclick="location.href = '<%= rails_admin_path %>'">
+              <a><i class="fa fa-tachometer"></i>  Administrator
+              </a>
+            </li>
+  <% end %>
+</div>
+     
+</body>
+</html> 
+
+
+<!DOCTYPE html>
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<style>
+.mySlides {display:none; height: 100%; position: center; size: cover;}
+.w3-left, .w3-right, .w3-badge {cursor:pointer}
+.w3-badge {height:13px;width:13px;padding:0}
+body, html {
+    height: 100%;
+    margin: 0;
+    color: white;
+
+}
+</style>
+
+<body style="background-color: #333;">
+<div class="w3-content w3-display-container">
+  <img class="mySlides" src="http://wallpaper.pickywallpapers.com/1920x1080/girl-listening-to-the-music.jpg" height="70%" width="100%">
+  <img class="mySlides" src="http://wallpaper.pickywallpapers.com/1024x600/girl-listening-to-music-in-blue-tint.jpg" height="70%" width="100%">
+  <img class="mySlides" src="https://avante.biz/wp-content/uploads/Music-Wallpaper/Music-Wallpaper-001.jpg" height="70%" width="100%">
+    <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
+    <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
+    <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
+    <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
+    <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
+  </div>
+</div>
+
+<script>
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function currentDiv(n) {
+  showDivs(slideIndex = n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  if (n > x.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+     dots[i].className = dots[i].className.replace(" w3-white", "");
+  }
+  x[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " w3-white";
+}
+</script>
+</body>
+
+<br><br><br>
+<div class="row">
+<div class="col-sm-4">
+<h1>Songs</h1>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @songs.each do |song| %>
+      <tr>
+        <td><%= song.name %></td>
+        <td><%= link_to 'Show', song %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  </table>
+  </div>
+  <div class="col-sm-4">
+<h1>Albums</h1>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @albums.each do |album| %>
+      <tr>
+        <td><%= album.name %></td>
+        <td><%= link_to 'Show', album %></td>
+      </tr>
+    <% end %>
+  
+  </tbody>
+</table>
+</div>
+<div class="col-sm-4">
+<h1>Bands</h1>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @bands.each do |band| %>
+      <tr>
+        <td><%= band.name %></td>
+        <td><%= link_to 'Show', band %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+</html> 

@@ -1,7 +1,10 @@
 class HomeController < ApplicationController
   def index
-  	if current_user
-  		redirect_to bands_path
-  	end
+  		@users = User.all
+		@songs = Song.all
+		@bands = Band.all
+		@artists = Artist.all
+		@albums = Album.all
+
   end
 end
