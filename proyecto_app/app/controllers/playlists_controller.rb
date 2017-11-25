@@ -17,6 +17,11 @@ class PlaylistsController < ApplicationController
     @playlist = Playlist.new
     @all_songs = Song.all
     @playlistsong = @playlist.playlist_songs.build
+
+    respond_to do |format|
+      format.html
+      format.json {render json: @playlist}
+    end
   end
   # GET /playlists/1/edit
   def edit
@@ -25,7 +30,7 @@ class PlaylistsController < ApplicationController
   # POST /playlists
   # POST /playlists.json
   def create
-    @playlist = Playlist.new(params[:name])
+    @playlist = Playlist.new(playlist_params)
     
     params[:songs][:id].each do |song|
       if !song.empty?
@@ -34,6 +39,7 @@ class PlaylistsController < ApplicationController
     end
 
     respond_to do |format|
+      @playlist.user_id = current_user.id if current_user
       if @playlist.save
         format.html { redirect_to @playlist, notice: 'Playlist was successfully created.' }
         format.json { render :show, status: :created, location: @playlist }
@@ -78,6 +84,6 @@ class PlaylistsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def playlist_params
-      params.require(:playlist).permit(:name, :song)
+      params.require(:playlist).permit(:name)
     end
 end
