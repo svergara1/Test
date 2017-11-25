@@ -4,10 +4,9 @@
       <div class="row">
       <h2  class="pull-left" style="color: white;"><%= @user.email%></h2></div><br><br>
       <div class="row">
-       
-          <div class="card card-inverse" style="background-color: #333; border-color: #333;">
 
-   
+     
+          <div class="card card-inverse" style="background-color: #333; border-color: #333;">
 
                 <div class="row">
                   <div class="col-md-6 col-lg-3 " align="center"> <img alt="User Pic" src="https://i.pinimg.com/originals/d9/68/c7/d968c710f77a940f052f88611f558dc8.jpg" class="img-circle img-responsive"> </div>
@@ -21,17 +20,67 @@
                         </div>
                         <div class="col-md-4 col-sm-4 text-center">
                         <h2 style="color: white;"><strong>1.4K</strong></h2>                    
-                        <p style="color: white;"><small>Following</small></p>
+                        <p style="color: white;"><small>Tweets</small></p>
                         <button class="btn btn-success btn-block btn-md"><span class="fa fa-twitter-square"></span> Tweet </button>
                         </div>
                         <div class="col-md-4 col-sm-4 text-center">
                         <h2 style="color: white;"><strong>3.8K</strong></h2>                    
                         <p style="color: white;"><small>Followers</small></p>
-                        <input type="button" class="btn btn-danger btn-block btn-md" onclick="unfollow_user_path,
-                             remote: true,
-                             class: 'btn unfollow-button',
-                             id: 'unfollow-button',
-                             method: :post;" value="Follow" />
+                        
+
+
+                      <% if @user == current_user %>
+                        <div><h1>Usuarios que sigo</h1></div>
+                        <table class="table table-bordered", style="color: white">
+                          <thead>
+                            <tr>
+                              <th><text-align:"center">Playlists</th>                              
+                              <th><%= link_to 'Create Playlist', new_playlist_path %></th>
+                            </tr>
+                          </thead>
+                        
+                          <tbody>
+                            <% current_user.playlists.each do |playlist| %>                              
+                              <tr>                               
+                                <td><%= playlist.name %></td>                                
+                                <td><%= link_to 'Show', playlist %></td>
+                              </tr>                                                                   
+                            <% end %>                        
+                          </tbody>
+                        </table>  
+                                          
+                      <% else %>    
+                        <% if current_user_is_following(current_user.id, @user.id) %>
+                          <%= link_to 'Unfollow', unfollow_user_path,
+                              remote: true,
+                              class: 'btn follow-button',
+                              id: 'follow-button',
+                              method: :post%>
+                        <% else %>
+                          <%= link_to 'Follow', follow_user_path,
+                              remote: true,
+                              class: 'btn follow-button',
+                              id: 'follow-button',
+                              method: :post%>
+                        <% end %>
+                        <table class="table table-bordered", style="color: white">
+                          <thead>
+                            <tr>
+                              <th><text-align:"center">Playlists</th>                                                          
+                            </tr>
+                          </thead>
+                        
+                          <tbody>
+                            <% @user.playlists.each do |playlist| %>                              
+                              <tr>                               
+                                <td><%= playlist.name %></td>                                
+                                <td><%= link_to 'Show', playlist %></td>
+                              </tr>                                                                   
+                            <% end %>                        
+                          </tbody>
+                        </table>  
+                      <% end %>
+                        
                     </table>
                   </div>
               </div>
@@ -43,6 +92,18 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+$('#unfollow-button').text('Unfollow')
+                     .attr('class', 'btn unfollow-button')
+                     .attr('href', "/<%= @user.id %>/follow_user")
+                     .attr('id', 'unfollow-button');
+
+$('#unfollow-button').attr('class', 'btn unfollow-button')
+                   .text('Follow1234')
+                   .attr('href', "/<%= @user.id %>/unfollow_user")
+                   .attr('id', 'follow-button');
+</script>  
 
 </body>
 </html>

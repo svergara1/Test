@@ -1,9 +1,11 @@
+
+
 <body style="background-color: #333; color: white">
 
 
 <p id="notice"><%= notice %></p>
 
-<h1>Songs</h1>
+<h1>Playlists</h1>
 
 <table class="table table-bordered">
   <thead>
@@ -14,10 +16,10 @@
   </thead>
 
   <tbody>
-    <% @songs.each do |song| %>
+    <% @playlists.each do |playlist| %>
       <tr>
-        <td><%= song.name %></td>
-        <td><%= link_to 'Show', song %></td>
+        <td><%= playlist.name %></td>
+        <td><%= link_to 'Show', playlist %></td>
       </tr>
     <% end %>
   </tbody>
