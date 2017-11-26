@@ -17,7 +17,7 @@
     <%= f.text_field :name %>
   </div>
 
-  <%= fields_for(@playlist_song) do |ab| %>
+  <%= fields_for(@playlistsong) do |ab| %>
     <div class ="field">
       <%= ab.label "All Songs" %><br />
       <%= collection_select(:songs, :id, @all_songs, :id, :name, {}, {:multiple => true}) %>
