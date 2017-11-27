@@ -19,7 +19,46 @@ Band.destroy_all
 Album.destroy_all
 
 
-
+concerts = Concert.create([{
+    :id => 1,
+    :name => "Adele",
+    :year => 10.days.ago,
+},
+{
+    :id => 2,
+    :name => "The Killers",
+    :year => 10.days.ago,
+ },
+ {
+    :id => 3,
+    :name => "Metallica",
+    :year => 10.days.ago,
+ },
+ {
+    :id => 4,
+    :name => "Eminem",
+    :year => 10.days.ago,
+ },
+   {
+    :id => 5,
+    :name => "Lollapalloza 2014",
+    :year => 10.days.ago,
+ },
+  {
+    :id => 6,
+    :name => "Lollapalloza 2015",
+    :year => 10.days.ago,
+ },
+  {
+    :id => 7,
+    :name => "Lollapalloza 2016",
+    :year => 10.days.ago,
+ },
+   {
+    :id => 8,
+    :name => "Lollapalloza 2017",
+    :year => 10.days.ago,
+  }])
 bandas = Band.create([{
 	:id => 1,
     :name => "Coldplay",
@@ -223,6 +262,7 @@ canciones = Song.create([{
 
 
 p "Created #{Song.count} songs"
+p "Created #{Concert.count} concerts"
 p "Created #{Artist.count} artists"
 p "Created #{Album.count} albums"
 p "Created #{Band.count} bands"

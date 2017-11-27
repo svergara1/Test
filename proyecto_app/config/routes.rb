@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :concerts
   root :to => 'home#index'
 
   
